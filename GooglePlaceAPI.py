@@ -34,7 +34,6 @@ def generate_nearby_restaurants(num_restaurants, start_location, end_location):
         # Randomly generate a location between start and end locations
         # location = round(random.uniform(start_location, end_location), 2)
         
-        # Create restaurant instance
         restaurant = Places(name, deliveryOptions, goodForChildren, paymentOptions, parkingAvailable)
         restaurants.append(restaurant)
     

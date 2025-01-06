@@ -5,15 +5,11 @@ from collections import Counter
 starting = ""
 destination = ""
 
-# Import necessary modules
 import pandas as pd
 import joblib
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
-
-# Load the model
 model = joblib.load('random_forest_model.pkl')
 
-# Define a function for making predictions
 def predict_speed(data):
     # Perform the same preprocessing as during training
     # One-hot encoding
@@ -31,14 +27,10 @@ def predict_speed(data):
         pd.DataFrame(test_type_encoder, columns=ohe.get_feature_names_out(ohe.feature_names_in_))
     ], axis=1)
 
-    # Drop the original columns and fill NaN values
     data = pd.concat([data.drop(columns=['Service Provider', 'LSA', 'Technology', 'Test_type']), encoded_df], axis=1)
     data.fillna(0, inplace=True)
-
-    # Standardize the features
     scaler = StandardScaler()
     data = scaler.fit_transform(data)
-    # Make prediction
     prediction = model.predict(data)
 
     return prediction
